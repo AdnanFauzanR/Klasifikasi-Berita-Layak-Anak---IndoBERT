@@ -1,0 +1,33 @@
+/* File: overlay.css */
+/* Tujuan: Styling badge kecil di pojok kanan atas halaman. */
+
+.layak-anak-badge {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 999999;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 2px solid #00bcd4;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #000000;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+}
+
+.layak-anak-badge::before {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background-color: #00c853; /* default hijau (layak) */
+}
+
+.layak-anak-badge[data-label="tidak_layak_anak"]::before {
+  background-color: #ff5252; /* merah kalau tidak layak */
+}
+

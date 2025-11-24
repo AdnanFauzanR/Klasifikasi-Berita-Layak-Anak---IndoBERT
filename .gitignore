@@ -1,0 +1,7 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Model besar - jangan di-commit
+model_service/models/

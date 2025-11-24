@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "Klasifikasi Berita Layak Anak",
+  "version": "0.1.0",
+  "description": "Menandai apakah berita layak anak berdasarkan model IndoBERT lokal.",
+  "permissions": ["scripting", "activeTab", "tabs"],
+  "host_permissions": ["http://127.0.0.1:8000/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.detik.com/*",
+        "*://*.news.detik.com/*",
+        "*://*.kompas.com/*",
+        "*://*.tribunnews.com/*",
+        "*://*.yahoo.com/*",
+        "*://*.kumparan.com/*",
+        "*://*.cnnindonesia.com/*",
+        "*://*.tempo.co/*",
+        "*://*.liputan6.com/*",
+        "*://*.cnbcindonesia.com/*"
+      ],
+      "js": ["contentScript.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "128": "icons/icon128.png"
+  }
+}
