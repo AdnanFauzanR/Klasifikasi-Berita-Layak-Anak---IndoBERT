@@ -23,7 +23,17 @@
         "*://*.cnbcindonesia.com/*"
       ],
       "js": ["contentScript.js"],
+      "css": ["overlay.css"],
       "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "board_LA.svg",
+        "board_TLA.svg"
+      ],
+      "matches": ["<all_urls>"]
     }
   ],
   "icons": {

@@ -79,37 +79,42 @@ function injectBadge(result) {
     return;
   }
 
-  const isChildSafe = label === "layak_anak";
+  // Tentukan path gambar berdasarkan klasifikasi
+  const imgSrc = label === "layak_anak"
+    ? chrome.runtime.getURL("board_LA.svg")
+    : chrome.runtime.getURL("board_TLA.svg");
 
+  // Hapus badge lama jika ada (agar tidak dobel)
+  const old = document.querySelector(".layak-anak-badge");
+  if (old) old.remove();
+
+  // Wrapper container
   const badge = document.createElement("div");
   badge.className = "layak-anak-badge";
-  badge.innerText = isChildSafe ? "KONTEN LAYAK ANAK" : "TIDAK LAYAK ANAK";
 
-  badge.setAttribute(
-    "data-score",
-    typeof score === "number" ? score.toFixed(2) : "0.00"
-  );
-  badge.setAttribute("data-label", label);
+  // Hanya menampilkan GAMBAR
+  const img = document.createElement("img");
+  img.src = imgSrc;
+  img.alt = label;
+  img.style.width = "300px";      // ukuran besar
+  img.style.height = "auto";
+  img.style.display = "block";
 
-  // Fallback style inline kalau overlay.css gagal load
+  // Styling dasar (kalau CSS gagal load)
   badge.style.position = "fixed";
   badge.style.top = "16px";
   badge.style.right = "16px";
   badge.style.zIndex = "999999";
-  badge.style.padding = "10px 16px";
-  badge.style.borderRadius = "999px";
-  badge.style.background = "#ffffff";
-  badge.style.border = "2px solid #00bcd4";
-  badge.style.fontFamily =
-    'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
-  badge.style.fontSize = "12px";
-  badge.style.fontWeight = "600";
-  badge.style.color = "#000000";
-  badge.style.boxShadow = "0 4px 10px rgba(0,0,0,0.18)";
+  badge.style.padding = "0";
+  badge.style.borderRadius = "12px";
+  badge.style.border = "none";
 
+  badge.appendChild(img);
   document.body.appendChild(badge);
-  console.log("[LayakAnak] Badge appended to DOM.");
+
+  console.log("[LayakAnak] Large image badge appended to DOM.");
 }
+
 
 function classifyArticle() {
   const text = getArticleText();
